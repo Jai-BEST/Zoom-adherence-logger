@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "The Undertaker",
+  "version": "1.2.2",
+  "description": "Logs Start, recorder join, and End timestamps for Zoom web meetings.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "The Undertaker",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.zoom.us/wc/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

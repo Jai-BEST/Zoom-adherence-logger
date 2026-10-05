@@ -1,54 +1,48 @@
 # The Undertaker
-### Zoom Recorder Timestamp & Adherence Logger
 
-A lightweight Chrome extension designed to track Zoom meeting timestamps, detect recording bot attendance and identify recording delays.
+This Chrome extension records only three timestamps:
 
-## The Problem
+- When you click **Start**
+- When the recorder name appears in a Zoom web meeting
+- When you click **End**
 
-Recording bots occasionally join Zoom meetings late or fail to join altogether. This creates discrepancies in meeting records and makes it difficult to accurately account for time spent in meetings.
+It stores the data locally in Chrome and exports a CSV that opens in Excel. It does not send data to any server.
 
-Manually tracking timestamps across multiple meetings is inefficient and prone to errors.
+## Install
 
-## The Solution
+1. Unzip the folder.
+2. Open `chrome://extensions` in Chrome.
+3. Turn on **Developer mode**.
+4. Click **Load unpacked**.
+5. Select the `zoom-adherence-logger` folder.
+6. Pin **The Undertaker** from the Extensions menu.
 
-The Undertaker automatically detects when a recording bot joins a Zoom meeting and calculates the delay between the manually recorded meeting start time and the recorder's arrival.
+## Use
 
-## Key Features
+1. Join the meeting using **Zoom in Chrome**, not the separate Zoom desktop app.
+2. Keep Zoom's Participants panel open so participant names exist on the page.
+3. Open the extension, enter a session name or chat/case number, and click **Start**.
+4. The extension automatically saves the time when a configured recorder name appears.
+5. Click **End** when the meeting ends.
+6. Click **Export CSV** when you need a report. It exports every saved completed call.
 
-- **Timestamp Tracking:** Record meeting start and end times.
-- **Automatic Detection:** Identify when the recording bot joins.
-- **Delay Calculation:** Calculate missing recording time.
-- **Manual Override:** Manually mark recorder arrival when necessary.
-- **Session References:** Associate meetings with reference numbers.
-- **Session History:** Review previously recorded sessions.
-- **CSV Export:** Download timestamp reports for documentation and schedule adjustments.
+Enter the recorder's exact display name in the extension settings. Multiple possible names can be separated with commas.
 
-## How to Use
+## Permissions
 
-1. Join a Zoom meeting through Chrome.
-2. Open The Undertaker and click Start.
-3. Keep the Participants panel visible for automatic recorder detection.
-4. Click End when your meeting finishes.
-5. Export your timestamp logs whenever required.
+The extension requests only:
 
-## Privacy & Security
+- `storage` to keep timestamps locally in the current Chrome profile.
+- Page access limited to `https://app.zoom.us/wc/*` so it can detect the configured recorder display name in the Zoom web meeting.
 
-- All session information is stored locally in Chrome.
-- No automatic transmission to external servers.
-- No audio or video recording.
-- No collection of passwords or authentication credentials.
-- Zoom webpage access is used exclusively for recorder detection.
+It does not request access to tabs, browsing history, Salesforce, Rippling, microphone, camera, audio, video, downloads, cookies or external servers.
 
-## Technical Information
+## Important limit
 
-- Platform: Google Chrome
-- Architecture: Manifest V3
-- Languages: JavaScript, HTML and CSS
-- Storage: Chrome Local Storage
-- Export Format: CSV
+Chrome extensions cannot read the participant list inside the separate Zoom desktop application. The manual **Mark recorder joined** button is included as a fallback. Automatic detection works only when the meeting runs in Zoom's web client and the participant name is present in the page.
 
-## Developer
+## Saved history and reset
 
-**Jai Balaji Kamma**
+History never resets at midnight or at a shift boundary. All completed calls remain visible and exportable until you click **Reset data** and confirm **Yes, reset all data**. Cancel keeps everything. Reset also stops the active log but keeps your recorder-name settings. Times and dates are explicitly IST; CSV includes both start and end dates for overnight calls.
 
-*An independent productivity tool for meeting timestamp tracking and recording delay analysis. Not affiliated with or endorsed by Zoom.*
+Session names are entered manually, stored locally, displayed in history and included in CSV exports. Older calls without a name display as Zoom session.

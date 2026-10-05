@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Undertaker</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>The Undertaker</h1>
+
+      <section id="idleView">
+        <label for="sessionName">Session name / chat or case number</label>
+        <input id="sessionName" placeholder="e.g. Case 123456" maxlength="200" />
+        <button id="startButton" class="primary">Start</button>
+      </section>
+
+      <section id="activeView" hidden>
+        <div class="status live">LIVE</div>
+        <div class="row"><span>Session</span><strong id="activeSessionName">—</strong></div>
+        <div class="row"><span>Started</span><strong id="startTime">—</strong></div>
+        <div class="row"><span>Recorder</span><strong id="recorderTime">Waiting…</strong></div>
+        <div class="row"><span>Elapsed</span><strong id="elapsed">00:00</strong></div>
+        <button id="markRecorderButton" class="secondary">Mark recorder joined</button>
+        <button id="endButton" class="danger">End</button>
+      </section>
+
+      <section class="settings">
+        <label for="recorderNames">Recorder names, separated by commas</label>
+        <input id="recorderNames" placeholder="rippling recorder, recorder" />
+        <button id="saveSettingsButton" class="small">Save names</button>
+      </section>
+
+      <section class="history">
+        <div class="historyHeader">
+          <h2>Saved calls · IST</h2>
+          <button id="exportButton" class="small">Export CSV</button>
+        </div>
+        <div id="sessions"></div>
+        <button id="resetButton" class="reset">Reset data</button>
+      </section>
+    </main>
+    <dialog id="resetDialog" aria-labelledby="resetTitle">
+      <h2 id="resetTitle">Are you sure you want to reset?</h2>
+      <p>This permanently deletes all saved calls and stops the active log. Export your CSV first if you need a copy.</p>
+      <button id="cancelResetButton" class="secondary">Cancel — keep my data</button>
+      <button id="confirmResetButton" class="danger">Yes, reset all data</button>
+    </dialog>
+    <script src="popup.js"></script>
+  </body>
+</html>
